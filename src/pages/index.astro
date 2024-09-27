@@ -1,0 +1,75 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
+import { getCollection } from "astro:content";
+import createSlug from "../lib/createSlug"
+
+const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const last_posts = posts.slice(0, 3);
+---
+
+<BaseLayout sideBarActiveItemID="home">
+  <div class="pb-12 mt-5">
+    <div class="text-xl py-1">Hey there 👋</div>
+    <div class="text-5xl font-bold">I'm Davide De Benedittis</div>
+    <div class="text-3xl py-3 font-bold">Robotics Engineer and PhD Student</div>
+    <div class="py-2">
+      <text class="text-lg">
+        PhD student by day, robotics engineer by night... Daaamn, I'm tired! 😅
+      </text>
+    </div>
+    <!-- <div class="mt-8">
+      <a class="btn" href="https://twitter.com/manuelernestog" target="_blank"> Let's connect!</a>
+      <a href="https://github.com/manuelernestog/astrofy" target="_blank" class="btn btn-outline ml-5">
+        Get This template
+      </a>
+    </div> -->
+  </div>
+
+  <div>
+    <div class="text-3xl w-full font-bold mb-2">My last projects {"</>"}</div>
+  </div>
+
+  <HorizontalCard
+    title="Control of Quadrupedal Robots on Soft Terrains"
+    img="https://raw.githubusercontent.com/ddebenedittis/media/main/rviz_legged/gif/rviz_legged_trot.gif"
+    desc="Model-based control for quadrupedal robots moving on compliant terrains."
+    url="https://github.com/ddebenedittis/control_quadrupeds_soft_contacts"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Hierarchical Constraint-Based Control of Multi-Robot Systems"
+    img="https://raw.githubusercontent.com/ddebenedittis/media/main/hierarchical_optimization_mpc/coverage_9.gif"
+    desc="Control of heterogeneous multi-robot fleet using hierarchical optimization and quadratic programming."
+    url="https://github.com/ddebenedittis/hierarchical_optimization_mpc"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Docker Container for ROS (1 and 2), GUIs, and NVIDIA GPUs"
+    img="/post_img.webp"
+    desc="Docker container to be used with ROS 1 or ROS 2. Supports the usage of GUIs and NVIDIA GPUs."
+    url="https://github.com/ddebenedittis/docker_ros_nvidia"
+    badge="ROS"
+  />
+
+  <div>
+    <div class="text-3xl w-full font-bold mb-5 mt-10">Latest publications</div>
+  </div>
+
+  {
+    last_posts.map((post) => (
+      <>
+        <HorizontalCard
+          title={post.data.title}
+          img={post.data.heroImage}
+          desc={post.data.description}
+          url={"/blog/" + createSlug(post.data.title, post.slug)}
+          target="_self"
+          badge={post.data.badge}
+        />
+        <div class="divider my-0" />
+      </>
+    ))
+  }
+</BaseLayout>
