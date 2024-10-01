@@ -16,8 +16,95 @@ const last_posts = posts.slice(0, 3);
     <div class="text-3xl py-3 font-bold">Robotics Engineer and PhD Student</div>
     <div class="py-2">
       <text class="text-lg">
-        PhD student by day, robotics engineer by night... Daaamn, I'm tired! 😅
+        PhD student by day, robotics engineer by night... <br>
+        My research focuses on:
+      <ul class="list-disc mx-6">
+        <li>Locomotion of legged robots 🦿</li>
+        <li>Planning and control of multi-robot systems 🤖🤖🤖</li>
+      </ul>
+
+      I like... <span class="typewrite" data-period="2000" 
+        data-type='[
+          "robots",
+          "basketball",
+          "programming",
+          "gym",
+          "sushi"
+          ]'>
+        <span class="wrap"></span>
+      </span>
       </text>
+  
+      <script>
+        var TxtType = function(el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
+  
+        TxtType.prototype.tick = function() {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i];
+  
+            if (this.isDeleting) {
+            this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+            this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+  
+            this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+  
+            var that = this;
+            var delta = 200 - Math.random() * 100;
+  
+            if (this.isDeleting) { delta /= 2; }
+  
+            if (!this.isDeleting && this.txt === fullTxt) {
+            delta = this.period;
+            this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+            this.isDeleting = false;
+            this.loopNum++;
+            delta = 500;
+            }
+  
+            setTimeout(function() {
+            that.tick();
+            }, delta);
+        };
+  
+        function init() {
+            var elements = document.getElementsByClassName('typewrite');
+            for (var i=0; i<elements.length; i++) {
+                var toRotate = elements[i].getAttribute('data-type');
+                var period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                  new TxtType(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            // INJECT CSS
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+            document.body.appendChild(css);
+
+            // Clean up by destroying instances and removing event listeners
+            document.addEventListener('astro:before-swap', () => {
+              // SomeClass.destroy()
+              // document.removeEventListener(...)
+            }, { once: true })
+        };
+
+        // Initialize on first load
+        init()
+
+        // Re-initialize after swapping pages
+        document.addEventListener("astro:after-swap", init)
+      </script>
     </div>
     <!-- <div class="mt-8">
       <a class="btn" href="https://twitter.com/manuelernestog" target="_blank"> Let's connect!</a>
