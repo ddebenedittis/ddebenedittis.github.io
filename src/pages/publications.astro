@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
+import HorizontalPublication from "@components/HorizontalPublication.astro";
 ---
 
 <BaseLayout title="Projects" sideBarActiveItemID="publications">
@@ -8,17 +9,23 @@ import HorizontalCard from "../components/HorizontalCard.astro";
     <div class="text-3xl w-full font-bold mb-5">My publications</div>
   </div>
 
-  <HorizontalCard
-    title="Publication 1"
-    img="/post_img.webp"
+  <HorizontalPublication
+    title="Articulated Soft Robots: A Feasibility Driven Control Approach"
+    img="/publications/art_soft_rob.webp"
+    auth="Davide De Benedittis, Saroj Prasad Chhatoi, Michele Pierallini, Franco Angelini, Carlos Mastalli, Manolo Garabini"
+    journal="Italian Conference on Robotics and Intelligent Machines (I-RIM 3D)"
+    date="24 Sep 2024"
     desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     badge="NEW"
     url="#"
   />
   <div class="divider my-0"></div>
-  <HorizontalCard
+  <HorizontalPublication
     title="Publication 2"
     img="/post_img.webp"
+    auth="Davide De Benedittis, John Doe"
+    journal="Journal of Astro"
+    date="2024"
     desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     url="#"
   />
