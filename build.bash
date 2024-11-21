@@ -1,1 +1,1 @@
-docker build -t astro_portfolio .
+docker build -t astro_personal_webpage .

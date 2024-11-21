@@ -1,1 +1,1 @@
-docker run -p 6969:80 astro_portfolio
+docker run -it --net=host -v "./src":/app/src astro_personal_webpage

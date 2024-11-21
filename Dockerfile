@@ -1,10 +1,12 @@
-FROM node:lts AS build
-WORKDIR /app
-COPY . .
-RUN npm i
-RUN npm i -D daisyui@latest
-RUN npm run build
+FROM node:lts AS dev
 
-FROM httpd:2.4 AS runtime
-COPY --from=build /app/dist /usr/local/apache2/htdocs/
-EXPOSE 80
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+RUN npm install -D daisyui@latest
+
+# Copy initial source files
+COPY . .
+
+EXPOSE 4321
+CMD ["npm", "run", "dev"]
