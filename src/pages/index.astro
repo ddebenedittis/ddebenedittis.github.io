@@ -7,7 +7,7 @@ import HorizontalPublication from "@components/HorizontalPublication.astro";
 
 const pubs = (await getCollection("publications")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const last_pubs = pubs.slice(0, 2);
+const last_pubs = pubs.slice(-3);
 ---
 
 <BaseLayout sideBarActiveItemID="home">
@@ -146,7 +146,7 @@ const last_pubs = pubs.slice(0, 2);
   </div>
 
   {
-    last_pubs.map((pub) => (
+    last_pubs.reverse().map((pub) => (
       <>
         <HorizontalPublication
           title={pub.data.title}
@@ -155,7 +155,7 @@ const last_pubs = pubs.slice(0, 2);
           auth={pub.data.auth}
           journal={pub.data.journal}
           date={pub.data.pubDate}
-          url={"/publications/" + createSlug(pub.data.title, pub.slug)}
+          url={pub.data.url}
           target="_self"
           badge={pub.data.badge}
         />
