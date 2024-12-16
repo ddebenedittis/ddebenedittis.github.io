@@ -1,11 +1,18 @@
 ---
-const { title, subtitle } = Astro.props;
+const { 
+  title = "Default Title", 
+  subtitle = "Default Subtitle", 
+  image = "/default-image.jpg", 
+  backgroundColor = "#3498db" // Default hex color
+} = Astro.props;
 ---
 
 <div class="flex">
   <div class="education__time">
-    <span class="w-4 h-4 bg-primary block rounded-full mt-1"></span>
-    <span class="education__line bg-primary block h-full w-[2px] translate-x-[7px]"></span>
+    <div class="w-10 h-10 rounded-full mt-1 overflow-hidden flex items-center justify-center translate-x-[-1px]" style={`background-color: ${backgroundColor};`}>
+      {image && <img src={image} alt="Timeline icon" class="w-full h-full object-cover rounded-full" />}
+    </div>
+    <span class="education__line bg-primary block h-full w-[2px] translate-x-[18px]"></span>
   </div>
   <div class="experience__data bd-grid px-5">
     <h3 class="font-semibold mb-1">{title}</h3>
