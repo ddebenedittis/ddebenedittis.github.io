@@ -3,16 +3,18 @@ const {
   title = "Default Title", 
   subtitle = "Default Subtitle", 
   image = "/default-image.jpg", 
-  backgroundColor = "#3498db" // Default hex color
+  backgroundColor = "#3498db", // Default hex color
+  color2 = "#3498db" // Default hex color
 } = Astro.props;
 ---
 
 <div class="flex">
   <div class="education__time">
     <div class="w-10 h-10 rounded-full mt-1 overflow-hidden flex items-center justify-center translate-x-[-1px]" style={`background-color: ${backgroundColor};`}>
-      {image && <img src={image} alt="Timeline icon" class="w-full h-full object-cover rounded-full" />}
+      {image && <img src={image} alt="Timeline icon" class="w-5/6 h-5/6 object-cover rounded-full" />}
     </div>
-    <span class="education__line bg-primary block h-full w-[2px] translate-x-[18px]"></span>
+    <span class="education__line block h-full w-[2px] translate-x-[18px]" 
+      style={`background: linear-gradient(to bottom, ${backgroundColor}, ${color2});`}></span>
   </div>
   <div class="experience__data bd-grid px-5">
     <h3 class="font-semibold mb-1">{title}</h3>
