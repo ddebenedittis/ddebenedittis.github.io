@@ -7,7 +7,7 @@ import HorizontalPublication from "@components/HorizontalPublication.astro";
 
 const pubs = (await getCollection("publications")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const last_pubs = pubs.slice(-3);
+const last_pubs = pubs.slice(-5);
 ---
 
 <BaseLayout sideBarActiveItemID="home">
@@ -20,9 +20,10 @@ const last_pubs = pubs.slice(-3);
         PhD student by day, robotics engineer by night...<br>
         My research focuses on:
       <ul class="list-disc mx-6">
-        <li>Locomotion of legged robots 🦿</li>
         <li>Planning and control of multi-robot systems 🤖🤖🤖</li>
+        <li>Locomotion of legged robots 🦿</li>
       </ul>
+      I aim to develop algorithms that can guarantee safety without sacrificing performance in real-world applications.
 
       I like... <span class="typewrite" data-period="2000" 
         data-type='[

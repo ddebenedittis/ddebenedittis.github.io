@@ -1,6 +1,10 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalPublication from "@components/HorizontalPublication.astro";
+
+const pubs = (await getCollection("publications")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const last_pubs = pubs.slice(-5);
 ---
 
 <BaseLayout title="Publications" sideBarActiveItemID="publications">
@@ -8,26 +12,24 @@ import HorizontalPublication from "@components/HorizontalPublication.astro";
     <div class="text-3xl w-full font-bold mb-5">My Publications</div>
   </div>
 
-  <HorizontalPublication
-    title="Soft Bilinear Inverted Pendulum: a Model to Enable Locomotion with Soft Contacts"
-    img="https://raw.githubusercontent.com/ddebenedittis/soft_bilinear_inverted_pendulum_astro/refs/heads/main/public/cover_pic.png"
-    auth="Davide De Benedittis, Franco Angelini, and Manolo Garabini"
-    journal="IEEE Transactions on Systems, Man, and Cybernetics: Systems"
-    date="4 Dec 2024"
-    desc="Model-based two-control-blocks architecture (motion planner and tracking controller) for quadrupedal locomotion in the presence of soft contacts."
-    url="https://ddebenedittis.github.io/soft_bilinear_inverted_pendulum_astro/"
-    paperUrl="https://ieeexplore.ieee.org/document/10777856"
-    githubUrl="https://github.com/ddebenedittis/control_quadrupeds_soft_contacts"
-    bibtex="@ARTICLE{debenedittis2025soft,\n author={De Benedittis, Davide and Angelini, Franco and Garabini, Manolo},\n journal={IEEE Transactions on Systems, Man, and Cybernetics: Systems}, \n title={Soft Bilinear Inverted Pendulum: A Model to Enable Locomotion With Soft Contacts}, \n year={2025},\n volume={55},\n number={2},\n pages={1478-1491},\n doi={10.1109/TSMC.2024.3504342}}"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalPublication
-    title="Articulated Soft Robots: A Feasibility Driven Control Approach"
-    img="/publications/art_soft_rob.webp"
-    auth="Davide De Benedittis, Saroj Prasad Chhatoi, Michele Pierallini, Franco Angelini, Carlos Mastalli, and Manolo Garabini"
-    journal="Italian Conference on Robotics and Intelligent Machines (I-RIM 3D)"
-    date="24 Sep 2024"
-    desc="Efficient DDP-based algorithm for trajectory optimization of articulated soft robots."
-    url="#"
-  />
+  {
+    last_pubs.reverse().map((pub) => (
+      <>
+        <HorizontalPublication
+          title={pub.data.title}
+          img={pub.data.heroImage}
+          desc={pub.data.description}
+          journal={pub.data.journal}
+          date={pub.data.pubDate}
+          url={pub.data.url}
+          paperUrl={pub.data.paperUrl}
+          githubUrl={pub.data.githubUrl}
+          bibtex={pub.data.bibtex}
+          target="_self"
+          badge={pub.data.badge}
+        />
+        <div class="divider my-0" />
+      </>
+    ))
+  }
 </BaseLayout>
