@@ -18,7 +18,7 @@ import { Image } from "astro:assets";
 ---
 
 <div
-  class="rounded-lg bg-base-100 hover:shadow-xl transition ease-in-out hover:scale-[102%]"
+  class="rounded-lg bg-base-100 hover:shadow-xl transition ease-in-out hover:scale-[102%] group"
 >
   <div class="flex flex-col md:flex-row gap-4 items-start md:items-center">
     <a href={url} target={target}>
@@ -34,10 +34,15 @@ import { Image } from "astro:assets";
           />
         )}
         <div class="grow w-full">
-          <h1 class="text-xl font-bold">
-            {title}
+          <h1 class="text-xl font-bold relative group">
+            <span class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent transition-opacity duration-[250ms] ease-in-out opacity-0 group-hover:opacity-100">
+              {title}
+            </span>
+            <span class="relative text-inherit transition-opacity duration-[250ms] ease-in-out group-hover:opacity-0">
+              {title}
+            </span>
             {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
-          </h1>
+          </h1>          
           <div>
             <span class="text-1xl mr-1"><em>{journal}</em> — {date}</span>
           </div>

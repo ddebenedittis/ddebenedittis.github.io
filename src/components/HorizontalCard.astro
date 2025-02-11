@@ -5,7 +5,7 @@ const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
 ---
 
 <div
-  class="rounded-lg bg-base-100 hover:shadow-xl transition ease-in-out hover:scale-[102%]"
+  class="rounded-lg bg-base-100 hover:shadow-xl transition ease-in-out hover:scale-[102%] group"
 >
   <a href={url} target={target}>
     <div class="hero-content flex-col md:flex-row">
@@ -22,10 +22,16 @@ const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
         )
       }
       <div class="grow w-full">
-        <h1 class="text-xl font-bold">
-          {title}
+        <h1 class="text-xl font-bold relative group">
+          <span class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent transition-opacity duration-[250ms] ease-in-out opacity-0 group-hover:opacity-100">
+            {title}
+          </span>
+          <span class="relative text-inherit transition-opacity duration-[250ms] ease-in-out group-hover:opacity-0">
+            {title}
+          </span>
           {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
         </h1>
+                  
         <p class="py-1 text-1xl">{desc}</p>
         <div class="card-actions justify-end">
           {
