@@ -47,6 +47,7 @@ const params = Astro.params;
               journal={post.data.journal}
               date={post.data.pubDate}
               url={post.data.url ? post.data.url : "/publications/" + createSlug(post.data.title, post.slug)}
+              tag_url={"/publications/tag"}
               target="_self"
               badge={post.data.badge}
               tags={post.data.tags}

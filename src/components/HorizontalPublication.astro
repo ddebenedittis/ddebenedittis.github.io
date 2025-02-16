@@ -7,6 +7,7 @@ const {
   journal,
   date,
   url = "",
+  tag_url = "",
   badge,
   tags,
   target = "_blank",
@@ -15,7 +16,7 @@ const {
   bibtex
 } = Astro.props;
 import { Image } from "astro:assets";
-const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
+// const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
 ---
 
 <div
