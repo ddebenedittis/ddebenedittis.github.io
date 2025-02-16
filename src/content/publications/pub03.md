@@ -5,5 +5,5 @@ journal: "IEEE Transactions on Field Robotics"
 description: "Autonomous monitoring framework for alpine screes using a quadrupedal robot equipped with cameras."
 pubDate: "Under review"
 heroImage: "/publications/screes.webp"
-tags: []
+tags: ["Quadruped"]
 ---

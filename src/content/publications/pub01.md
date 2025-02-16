@@ -5,7 +5,8 @@ journal: "Italian Conference on Robotics and Intelligent Machines (I-RIM 3D)"
 description: "Efficient DDP-based algorithm for trajectory optimization of articulated soft robots."
 pubDate: "24 Sep 2024"
 heroImage: "/publications/art_soft_rob.webp"
-tags: []
+badge: ""
+tags: ["Soft Robots"]
 ---
 
 Soft robots offer safer interaction during tasks, but suitable controllers that leverage their uniqueness are still under development.
