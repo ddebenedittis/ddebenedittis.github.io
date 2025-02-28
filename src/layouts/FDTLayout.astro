@@ -1,0 +1,66 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import SideBar from "../components/SideBar.astro";
+import { ViewTransitions } from "astro:transitions";
+import { Toggle } from 'astro-theme-toggle'
+
+import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from "../config";
+
+const {
+  image,
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  includeSidebar = true,
+  sideBarActiveItemID,
+  ogType,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-theme="lofi">
+  <head>
+    <BaseHead title={title} description={description} image={image} ogType={ogType} />
+    {TRANSITION_API && <ViewTransitions />}
+
+    <!-- amCharts 5 scripts from CDN -->
+    <script src="https://cdn.amcharts.com/lib/5/index.js" defer></script>
+    <script src="https://cdn.amcharts.com/lib/5/hierarchy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      }
+      #chartdiv {
+        width: 100%;
+        height: 550px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-base-100 drawer lg:drawer-open">
+      <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content bg-base-100">
+        <Header title={SITE_TITLE} />
+        <div class="fixed top-2 right-4 z-[999] bg-base-200 p-2 rounded-full shadow-lg flex items-center justify-center">
+          <div class="w-8 h-8">
+            <Toggle style="width: 100%; height: 100%;" />
+          </div>
+        </div>
+        <div class="md:flex md:justify-center">
+          <main class="p-6 pt-10 lg:max-w-[900px] max-w-[100vw]">
+            <slot />
+          </main>
+        </div>
+        <Footer />
+      </div>
+      {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} />}
+    </div>
+
+    <!-- Load JavaScript -->
+    <script src="/scripts/fdt.js" defer></script>
+  </body>
+</html>
