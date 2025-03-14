@@ -136,29 +136,32 @@ var pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
 /* ========================================================================= */
 
 pointSeries.bullets.push(function(root, dataItem) {
-  // Create a container to hold both the circle and the image
-  var container = am5.Container.new(root, {});
-
+    // Create a container to hold both the circle and the image
+  var container = am5.Container.new(root, {
+    tooltipText: "{title}",
+    cursorOverStyle: "pointer",
+  });
+  
   // Create the background circle with custom color
   var circle = am5.Circle.new(root, {
-    radius: 10, // Adjust size as needed
-    fill: am5.color(dataItem.get("color") || 0xffba00), // Default color if none is provided
+    radius: 10,
+    fill: am5.color(dataItem.get("color") || 0xffba00),
     stroke: root.interfaceColors.get("background"),
     strokeWidth: 2
   });
 
   // Create the image with custom path
   var image = am5.Picture.new(root, {
-    width: 16, // Adjust to fit inside the circle
+    width: 16,
     height: 16,
-    src: dataItem.get("imageSrc") || "default-image.png", // Default image if none is provided
+    src: dataItem.get("imageSrc") || "default-image.png",
     centerX: am5.p50,
     centerY: am5.p50
   });
 
   // Add both elements to the container
   container.children.push(circle);
-  container.children.push(image);
+  // container.children.push(image);
 
   // Make the container draggable
   container.events.on("dragged", function(event) {
@@ -166,10 +169,10 @@ pointSeries.bullets.push(function(root, dataItem) {
     var projection = chart.get("projection");
     var geoPoint = chart.invert({ x: container.x(), y: container.y() });
 
-    dataItem.setAll({
-      longitude: geoPoint.longitude,
-      latitude: geoPoint.latitude
-    });
+      dataItem.setAll({
+        longitude: geoPoint.longitude,
+        latitude: geoPoint.latitude
+      });
   });
 
   return am5.Bullet.new(root, {
@@ -179,9 +182,9 @@ pointSeries.bullets.push(function(root, dataItem) {
 
 /* ========================================================================= */
 
-var bari = addCity({ latitude: 41.1253, longitude: 16.8662 }, "Bari");
-var pisa = addCity({ latitude: 43.7228, longitude: 10.4017 }, "Pisa");
-var madrid = addCity({ latitude: 40.4168, longitude: -3.7038 }, "Madrid");
+var bari = addCity(41.1253, 16.8662, "Bari", "http://www.amcharts.com");
+var pisa = addCity(43.7228, 10.4017, "Pisa", "http://www.amcharts.com");
+var madrid = addCity(40.4168,-3.7038, "Madrid", "http://www.amcharts.com");
 
 var lineDataItem = lineSeries.pushDataItem({
   pointsToConnect: [bari, pisa, madrid]
@@ -231,11 +234,12 @@ planeDataItem.on("positionOnLine", (value) => {
   planeDataItem.dataContext.prevPosition = value;
 });
 
-function addCity(coords, title, color, imageSrc) {
+function addCity(latitude, longitude, title, url, color, imageSrc) {
   return pointSeries.pushDataItem({
-    latitude: coords.latitude,
-    longitude: coords.longitude,
+    latitude: latitude,
+    longitude: longitude,
     title: title,
+    url: url,
     color: color,
     imageSrc: imageSrc
   });
