@@ -135,67 +135,61 @@ var pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
 
 /* ========================================================================= */
 
+var circleTemplate = am5.Template.new({
+  tooltipText: "{title}",
+  fill: am5.color(0xffba00), // Default fill (will be overridden dynamically)
+  stroke: root.interfaceColors.get("background"),
+  strokeWidth: 2
+});
+
+// Set the point series with templateField
+pointSeries.setAll({
+  polygonIdField: "id",
+  calculateAggregates: true,
+  valueField: "value"
+});
+
 pointSeries.bullets.push(function(root, dataItem) {
-    // Create a container to hold both the circle and the image
   var container = am5.Container.new(root, {
     tooltipText: "{title}",
     cursorOverStyle: "pointer",
     draggable: false
   });
-  
-  // Attach click event to container
+
   container.events.on("click", function () {
-    var dataItem = container.dataItem; // Use container's dataItem directly
+    var dataItem = container.dataItem;
     if (dataItem && dataItem.dataContext && dataItem.dataContext.url) {
       window.open(dataItem.dataContext.url, "_blank");
-    } else {
-      console.log("Click event triggered, but no URL found.");
     }
   });
 
-  // Create the background circle with custom color
   var circle = am5.Circle.new(root, {
     radius: 10,
-    fill: am5.color(dataItem.get("color") || 0xffba00),
-    stroke: root.interfaceColors.get("background"),
-    strokeWidth: 2
-  });
+    templateField: "circleTemplate" // Ensure template is applied
+  }, circleTemplate);
 
-  // Create the image with custom path
-  var image = am5.Picture.new(root, {
-    width: 16,
-    height: 16,
-    src: dataItem.get("imageSrc") || "default-image.png",
-    centerX: am5.p50,
-    centerY: am5.p50
-  });
-
-  // Add both elements to the container
   container.children.push(circle);
-  // container.children.push(image);
-
-  // Make the container draggable
-  container.events.on("dragged", function(event) {
-    var dataItem = event.target.dataItem;
-    var projection = chart.get("projection");
-    var geoPoint = chart.invert({ x: container.x(), y: container.y() });
-
-    dataItem.setAll({
-      longitude: geoPoint.longitude,
-      latitude: geoPoint.latitude
-    });
-  });
-
-  return am5.Bullet.new(root, {
-    sprite: container
-  });
+  return am5.Bullet.new(root, { sprite: container });
 });
+
+// Function to add cities with correct colors
+function addCity(latitude, longitude, title, url, color) {
+  var dataItem = pointSeries.pushDataItem({
+    latitude: latitude,
+    longitude: longitude,
+    title: title,
+    circleTemplate: { fill: color || colors.getIndex(3) } // Assign color dynamically
+  });
+
+  dataItem.dataContext = { url: url };
+  return dataItem;
+}
 
 /* ========================================================================= */
 
-var bari = addCity(41.1253, 16.8662, "Bari", "https://www.liceoscacchibari.it/");
-var pisa = addCity(43.7228, 10.4017, "Pisa", "https://www.unipi.it/");
-var madrid = addCity(40.4168,-3.7038, "Madrid", "https://www.csic.es/en/csic");
+var bari = addCity(41.1253, 16.8662, "Bari - Scacchi", "https://www.liceoscacchibari.it/", "#6f869a");
+var pisa = addCity(43.7228, 10.4017, "Pisa - UniPi", "https://www.unipi.it/", "#0f4a7c");
+var madrid = addCity(40.4168,-3.7038, "Madrid - CSIC", "https://www.csic.es/en/csic", "#b01220");
 
 var lineDataItem = lineSeries.pushDataItem({
   pointsToConnect: [bari, pisa, madrid]
@@ -250,13 +244,14 @@ function addCity(latitude, longitude, title, url, color, imageSrc) {
     latitude: latitude,
     longitude: longitude,
     title: title,
-    color: color,
+    circleTemplate: { fill: color },
     imageSrc: imageSrc
   });
 
   // Explicitly set dataContext to ensure URL is accessible in click event
   dataItem.dataContext = {
-    url: url
+    url: url,
+    circleTemplate: { fill: color }
   };
 
   return dataItem;
