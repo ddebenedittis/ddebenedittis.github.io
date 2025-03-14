@@ -91,6 +91,33 @@ var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
   geoJSON: am5geodata_worldLow
 }));
 
+polygonSeries.mapPolygons.template.setAll({
+  tooltipText: "{name}",
+  templateField: "polygonSettings"
+});
+
+// Visited countries
+// IT, GB, FR, ES, DE, CZ, HU, NO, SE, GR, CH, PT, AT, NL, HR, BG
+
+polygonSeries.data.setAll([
+  {id: "IT", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "GB", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "FR", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "ES", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "DE", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "CZ", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "HU", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "NO", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "SE", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "GR", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "CH", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "PT", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "AT", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "NL", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "HR", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "BG", polygonSettings: {fill: am5.color(0x7dd97b)}}
+]);
+
 // Create line series for trajectory lines
 // https://www.amcharts.com/docs/v5/charts/map-chart/map-line-series/
 var lineSeries = chart.series.push(am5map.MapLineSeries.new(root, {}));
