@@ -105,36 +105,6 @@ var pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
 
 /* ========================================================================= */
 
-// pointSeries.bullets.push(function() {
-//   var circle = am5.Circle.new(root, {
-//     radius: 7,
-//     tooltipText: "Drag me!",
-//     cursorOverStyle: "pointer",
-//     tooltipY: 0,
-//     fill: am5.color(0xffba00),
-//     stroke: root.interfaceColors.get("background"),
-//     strokeWidth: 2,
-//     draggable: true
-//   });
-
-//   circle.events.on("dragged", function(event) {
-//     var dataItem = event.target.dataItem;
-//     var projection = chart.get("projection");
-//     var geoPoint = chart.invert({ x: circle.x(), y: circle.y() });
-
-//     dataItem.setAll({
-//       longitude: geoPoint.longitude,
-//       latitude: geoPoint.latitude
-//     });
-//   });
-
-//   return am5.Bullet.new(root, {
-//     sprite: circle
-//   });
-// });
-
-/* ========================================================================= */
-
 var circleTemplate = am5.Template.new({
   tooltipText: "{title}",
   fill: am5.color(0xffba00), // Default fill (will be overridden dynamically)
@@ -178,7 +148,7 @@ function addCity(latitude, longitude, title, url, color) {
     latitude: latitude,
     longitude: longitude,
     title: title,
-    circleTemplate: { fill: color || colors.getIndex(3) } // Assign color dynamically
+    circleTemplate: { fill: color || "#0f4a7c" } // Assign color dynamically
   });
 
   dataItem.dataContext = { url: url };
@@ -188,11 +158,12 @@ function addCity(latitude, longitude, title, url, color) {
 /* ========================================================================= */
 
 var bari = addCity(41.1253, 16.8662, "Bari - Scacchi", "https://www.liceoscacchibari.it/", "#6f869a");
-var pisa = addCity(43.7228, 10.4017, "Pisa - UniPi", "https://www.unipi.it/", "#0f4a7c");
+var pisa_1 = addCity(43.6228, 10.3017, "Pisa - UniPi & Sant'Anna", "https://www.unipi.it/", "#b40010");
+var pisa_2 = addCity(43.7228, 10.4017, "Pisa - UniPi", "https://www.unipi.it/", "#0f4a7c", "/icons/unipi_white.svg");
 var madrid = addCity(40.4168,-3.7038, "Madrid - CSIC", "https://www.csic.es/en/csic", "#b01220");
 
 var lineDataItem = lineSeries.pushDataItem({
-  pointsToConnect: [bari, pisa, madrid]
+  pointsToConnect: [bari, pisa_1, madrid, pisa_2]
 });
 
 var planeSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
