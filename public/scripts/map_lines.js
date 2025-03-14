@@ -156,6 +156,7 @@ pointSeries.bullets.push(function(root, dataItem) {
     tooltipText: "{title}",
     cursorOverStyle: "pointer",
     draggable: false,
+    scale: 1,
   });
 
   container.events.on("click", function () {
@@ -171,6 +172,7 @@ pointSeries.bullets.push(function(root, dataItem) {
     templateField: "circleTemplate"
   }, circleTemplate);
 
+  // Create the image
   var image = am5.Picture.new(root, {
     width: 16,
     height: 16,
@@ -185,11 +187,39 @@ pointSeries.bullets.push(function(root, dataItem) {
   return am5.Bullet.new(root, { sprite: container });
 });
 
+// chart.events.on("wheel", function() {
+chart.events.onAll(function(event) {
+  setTimeout(() => {
+  var zoomLevel = chart.get("zoomLevel") || 1;
+
+  pointSeries.dataItems.forEach(function(dataItem) {
+    if (dataItem.bullets) {
+      dataItem.bullets.forEach(function(bullet) {
+        var container = bullet.get("sprite");
+        if (container) {
+          container.animate({
+            key: "scale",
+            to: zoomLevel ** 0.35,
+            duration: 400,
+            easing: am5.ease.out(am5.ease.cubic)
+          });
+        }
+      });
+    }
+  });
+  }, 400); // 200ms delay before animation starts
+});
+
+// Debugging events
+// chart.events.onAll(function(event) {
+//   console.log("Event triggered:", event);
+// });
+
 /* ========================================================================= */
 
 var bari = addCity(41.1253, 16.8662, "Bari - Scacchi", "https://www.liceoscacchibari.it/", "#6f869a");
-var pisa_1 = addCity(43.6228, 10.3017, "Pisa - UniPi & Sant'Anna", "https://www.santannapisa.it/it", "#b40010", "/icons/sssa_white.svg");
-var pisa_2 = addCity(43.7228, 10.4017, "Pisa - UniPi", "https://www.unipi.it/", "#0f4a7c", "/icons/unipi_white.svg");
+var pisa_1 = addCity(43.4667, 10.3500, "Pisa - UniPi & Sant'Anna", "https://www.santannapisa.it/it", "#b40010", "/icons/sssa_white.svg");
+var pisa_2 = addCity(43.9667, 10.6500, "Pisa - UniPi", "https://www.unipi.it/", "#0f4a7c", "/icons/unipi_white.svg");
 var madrid = addCity(40.4168,-3.7038, "Madrid - CSIC", "https://www.csic.es/en/csic", "#b01220", "/icons/csic_white.svg");
 
 var lineDataItem = lineSeries.pushDataItem({
