@@ -134,9 +134,13 @@ var pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
 
 var circleTemplate = am5.Template.new({
   tooltipText: "{title}",
-  fill: am5.color(0xffba00), // Default fill (will be overridden dynamically)
+  fill: am5.color(0xffba00),
   stroke: root.interfaceColors.get("background"),
   strokeWidth: 2
+});
+
+var imageTemplate = am5.Template.new({
+  src: ""
 });
 
 // Set the point series with templateField
@@ -147,10 +151,11 @@ pointSeries.setAll({
 });
 
 pointSeries.bullets.push(function(root, dataItem) {
+  // Create a container to hold both the circle and the image
   var container = am5.Container.new(root, {
     tooltipText: "{title}",
     cursorOverStyle: "pointer",
-    draggable: false
+    draggable: false,
   });
 
   container.events.on("click", function () {
@@ -160,34 +165,32 @@ pointSeries.bullets.push(function(root, dataItem) {
     }
   });
 
+  // Create the background circle with custom color
   var circle = am5.Circle.new(root, {
     radius: 10,
-    templateField: "circleTemplate" // Ensure template is applied
+    templateField: "circleTemplate"
   }, circleTemplate);
 
+  var image = am5.Picture.new(root, {
+    width: 16,
+    height: 16,
+    centerX: am5.p50,
+    centerY: am5.p50,
+    templateField: "imageTemplate"
+  }, imageTemplate);
+
   container.children.push(circle);
+  container.children.push(image);
+
   return am5.Bullet.new(root, { sprite: container });
 });
-
-// Function to add cities with correct colors
-function addCity(latitude, longitude, title, url, color) {
-  var dataItem = pointSeries.pushDataItem({
-    latitude: latitude,
-    longitude: longitude,
-    title: title,
-    circleTemplate: { fill: color || "#0f4a7c" } // Assign color dynamically
-  });
-
-  dataItem.dataContext = { url: url };
-  return dataItem;
-}
 
 /* ========================================================================= */
 
 var bari = addCity(41.1253, 16.8662, "Bari - Scacchi", "https://www.liceoscacchibari.it/", "#6f869a");
-var pisa_1 = addCity(43.6228, 10.3017, "Pisa - UniPi & Sant'Anna", "https://www.unipi.it/", "#b40010");
+var pisa_1 = addCity(43.6228, 10.3017, "Pisa - UniPi & Sant'Anna", "https://www.santannapisa.it/it", "#b40010", "/icons/sssa_white.svg");
 var pisa_2 = addCity(43.7228, 10.4017, "Pisa - UniPi", "https://www.unipi.it/", "#0f4a7c", "/icons/unipi_white.svg");
-var madrid = addCity(40.4168,-3.7038, "Madrid - CSIC", "https://www.csic.es/en/csic", "#b01220");
+var madrid = addCity(40.4168,-3.7038, "Madrid - CSIC", "https://www.csic.es/en/csic", "#b01220", "/icons/csic_white.svg");
 
 var lineDataItem = lineSeries.pushDataItem({
   pointsToConnect: [bari, pisa_1, madrid, pisa_2]
@@ -243,13 +246,14 @@ function addCity(latitude, longitude, title, url, color, imageSrc) {
     longitude: longitude,
     title: title,
     circleTemplate: { fill: color },
-    imageSrc: imageSrc
+    imageTemplate: { src: imageSrc }
   });
 
   // Explicitly set dataContext to ensure URL is accessible in click event
   dataItem.dataContext = {
     url: url,
-    circleTemplate: { fill: color }
+    circleTemplate: { fill: color },
+    imageTemplate: { src: imageSrc },
   };
 
   return dataItem;
