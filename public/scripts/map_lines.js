@@ -140,6 +140,7 @@ pointSeries.bullets.push(function(root, dataItem) {
   var container = am5.Container.new(root, {
     tooltipText: "{title}",
     cursorOverStyle: "pointer",
+    draggable: false
   });
   
   // Create the background circle with custom color
