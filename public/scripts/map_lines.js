@@ -143,6 +143,16 @@ pointSeries.bullets.push(function(root, dataItem) {
     draggable: false
   });
   
+  // Attach click event to container
+  container.events.on("click", function () {
+    var dataItem = container.dataItem; // Use container's dataItem directly
+    if (dataItem && dataItem.dataContext && dataItem.dataContext.url) {
+      window.open(dataItem.dataContext.url, "_blank");
+    } else {
+      console.log("Click event triggered, but no URL found.");
+    }
+  });
+
   // Create the background circle with custom color
   var circle = am5.Circle.new(root, {
     radius: 10,
@@ -170,10 +180,10 @@ pointSeries.bullets.push(function(root, dataItem) {
     var projection = chart.get("projection");
     var geoPoint = chart.invert({ x: container.x(), y: container.y() });
 
-      dataItem.setAll({
-        longitude: geoPoint.longitude,
-        latitude: geoPoint.latitude
-      });
+    dataItem.setAll({
+      longitude: geoPoint.longitude,
+      latitude: geoPoint.latitude
+    });
   });
 
   return am5.Bullet.new(root, {
@@ -183,9 +193,9 @@ pointSeries.bullets.push(function(root, dataItem) {
 
 /* ========================================================================= */
 
-var bari = addCity(41.1253, 16.8662, "Bari", "http://www.amcharts.com");
-var pisa = addCity(43.7228, 10.4017, "Pisa", "http://www.amcharts.com");
-var madrid = addCity(40.4168,-3.7038, "Madrid", "http://www.amcharts.com");
+var bari = addCity(41.1253, 16.8662, "Bari", "https://www.liceoscacchibari.it/");
+var pisa = addCity(43.7228, 10.4017, "Pisa", "https://www.unipi.it/");
+var madrid = addCity(40.4168,-3.7038, "Madrid", "https://www.csic.es/en/csic");
 
 var lineDataItem = lineSeries.pushDataItem({
   pointsToConnect: [bari, pisa, madrid]
@@ -236,14 +246,20 @@ planeDataItem.on("positionOnLine", (value) => {
 });
 
 function addCity(latitude, longitude, title, url, color, imageSrc) {
-  return pointSeries.pushDataItem({
+  var dataItem = pointSeries.pushDataItem({
     latitude: latitude,
     longitude: longitude,
     title: title,
-    url: url,
     color: color,
     imageSrc: imageSrc
   });
+
+  // Explicitly set dataContext to ensure URL is accessible in click event
+  dataItem.dataContext = {
+    url: url
+  };
+
+  return dataItem;
 }
 
 // Make stuff animate on load
