@@ -3,12 +3,13 @@ const {
   title = "Default Title", 
   subtitle = "Default Subtitle", 
   image = "/default-image.jpg", 
-  backgroundColor = "#3498db", // Default hex color
-  color2 = "#3498db" // Default hex color
+  backgroundColor = "#3498db",
+  color2 = "#3498db",
+  id = ""
 } = Astro.props;
 ---
 
-<div class="flex">
+<div class="flex" id={id}>
   <div class="education__time">
     <div class="w-10 h-10 rounded-full mt-1 overflow-hidden flex items-center justify-center translate-x-[-1px]" style={`background-color: ${backgroundColor};`}>
       {image && <img src={image} alt="Timeline icon" class="w-5/6 h-5/6 object-cover rounded-full" />}
