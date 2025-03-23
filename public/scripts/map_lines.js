@@ -136,7 +136,11 @@ var circleTemplate = am5.Template.new({
   tooltipText: "{title}",
   fill: am5.color(0xffba00),
   stroke: root.interfaceColors.get("background"),
-  strokeWidth: 2
+  strokeWidth: 2,
+  tooltip: am5.Tooltip.new(root, {
+    labelText: "{title}",
+    labelFill: am5.color(0xFFFFFF)
+  })
 });
 
 var imageTemplate = am5.Template.new({
