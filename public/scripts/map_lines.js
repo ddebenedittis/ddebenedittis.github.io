@@ -133,12 +133,12 @@ var pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
 /* ========================================================================= */
 
 var circleTemplate = am5.Template.new({
-  tooltipText: "{title}",
+  tooltipText: "{title}\n{description}",
   fill: am5.color(0xffba00),
   stroke: root.interfaceColors.get("background"),
   strokeWidth: 2,
   tooltip: am5.Tooltip.new(root, {
-    labelText: "{title}",
+    labelText: "{title}\n{description}",
     labelFill: am5.color(0xFFFFFF)
   })
 });
@@ -222,10 +222,38 @@ chart.events.onAll(function(event) {
 
 /* ========================================================================= */
 
-var bari = addCity(41.1253, 16.8662, "Bari - Scacchi", "https://www.liceoscacchibari.it/", "#6f869a", "/icons/scacchi_white.png");
-var pisa_1 = addCity(43.4667, 10.3500, "Pisa - UniPi & Sant'Anna", "/cv#sssa", "#b40010", "/icons/sssa_white.svg");
-var pisa_2 = addCity(43.9667, 10.6500, "Pisa - UniPi", "/cv#phd", "#0f4a7c", "/icons/unipi_white.svg");
-var madrid = addCity(40.4168,-3.7038, "Madrid - CSIC", "/cv#csic", "#b01220", "/icons/csic_white.svg");
+var bari = addCity(
+  41.1253, 16.8662,
+  "Bari - Scacchi",
+  "https://www.liceoscacchibari.it/",
+  "#6f869a",
+  "/icons/scacchi_white.png",
+  "Scientific High School"
+);
+var pisa_1 = addCity(
+  43.4667, 10.3500,
+  "Pisa - UniPi & Sant'Anna",
+  "/cv#sssa",
+  "#b40010",
+  "/icons/sssa_white.svg",
+  "Bachelor's Degree in Mechanical Engineering"
+);
+var pisa_2 = addCity(
+  43.9667, 10.6500,
+  "Pisa - UniPi",
+  "/cv#phd",
+  "#0f4a7c",
+  "/icons/unipi_white.svg",
+  "Master's Degree and PhD in Robotics Engineering"
+);
+var madrid = addCity(
+  40.4168, -3.7038,
+  "Madrid - CSIC",
+  "/cv#csic",
+  "#b01220",
+  "/icons/csic_white.svg",
+  "Research stay"
+);
 
 var lineDataItem = lineSeries.pushDataItem({
   pointsToConnect: [bari, pisa_1, madrid, pisa_2]
@@ -275,11 +303,12 @@ planeDataItem.on("positionOnLine", (value) => {
   planeDataItem.dataContext.prevPosition = value;
 });
 
-function addCity(latitude, longitude, title, url, color, imageSrc) {
+function addCity(latitude, longitude, title, url, color, imageSrc, description) {
   var dataItem = pointSeries.pushDataItem({
     latitude: latitude,
     longitude: longitude,
     title: title,
+    description: description,
     circleTemplate: { fill: color },
     imageTemplate: { src: imageSrc }
   });
