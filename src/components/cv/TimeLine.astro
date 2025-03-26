@@ -9,7 +9,7 @@ const {
 } = Astro.props;
 ---
 
-<div class="flex" id={id}>
+<div class="flex hover:shadow-xl transition ease-in-out hover:scale-[102%] hover:-translate-x-[-1%] group" id={id}>
   <div class="education__time">
     <div class="w-10 h-10 rounded-full mt-1 overflow-hidden flex items-center justify-center translate-x-[-1px]" style={`background-color: ${backgroundColor};`}>
       {image && <img src={image} alt="Timeline icon" class="w-5/6 h-5/6 object-cover rounded-full" />}
@@ -18,7 +18,15 @@ const {
       style={`background: linear-gradient(to bottom, ${backgroundColor}, ${color2});`}></span>
   </div>
   <div class="experience__data bd-grid px-5">
-    <h3 class="font-semibold mb-1">{title}</h3>
+    <h3 class="font-semibold mb-1 relative group">
+      <span class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent transition-opacity duration-[250ms] ease-in-out opacity-0 group-hover:opacity-100">
+        {title}
+      </span>
+      <span class="relative text-inherit transition-opacity duration-[250ms] ease-in-out group-hover:opacity-0">
+        {title}
+      </span>
+    </h3>
+    <span class="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"></span>
     <span class="font-light text-sm">{subtitle}</span>
     <p class="my-2 text-justify">
       <slot />
