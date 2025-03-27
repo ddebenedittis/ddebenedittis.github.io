@@ -3,7 +3,7 @@ title: "Articulated Soft Robots: A Feasibility Driven Control Approach"
 auth: "Davide De Benedittis, Saroj Prasad Chhatoi, Michele Pierallini, Franco Angelini, Carlos Mastalli, and Manolo Garabini"
 journal: "Italian Conference on Robotics and Intelligent Machines (I-RIM 3D)"
 description: "Efficient DDP-based algorithm for trajectory optimization of articulated soft robots."
-pubDate: "24 Sep 2024"
+pubDate: "24 Oct 2024"
 heroImage: "/publications/art_soft_rob.webp"
 badge: ""
 tags: ["Soft Robots"]
