@@ -224,35 +224,35 @@ chart.events.onAll(function(event) {
 
 var bari = addCity(
   41.1253, 16.8662,
-  "Bari - Scacchi",
+  "Bari – Scacchi",
   "https://www.liceoscacchibari.it/",
   "#6f869a",
   "/icons/scacchi_white.png",
-  "Scientific High School"
+  "2009 – 2014\nScientific High School"
 );
 var pisa_1 = addCity(
   43.4667, 10.3500,
-  "Pisa - UniPi & Sant'Anna",
+  "Pisa – UniPi & Sant'Anna",
   "/cv#sssa",
   "#b40010",
   "/icons/sssa_white.svg",
-  "Bachelor's Degree in Mechanical Engineering"
+  "2014 – 2018\nBachelor's Degree in Mechanical Engineering"
 );
 var pisa_2 = addCity(
   43.9667, 10.6500,
-  "Pisa - UniPi",
+  "Pisa – UniPi",
   "/cv#phd",
   "#0f4a7c",
   "/icons/unipi_white.svg",
-  "Master's Degree and PhD in Robotics Engineering"
+  "2018 – 2026\nMaster's Degree and PhD in Robotics Engineering"
 );
 var madrid = addCity(
   40.4168, -3.7038,
-  "Madrid - CSIC",
+  "Madrid – CSIC",
   "/cv#csic",
   "#b01220",
   "/icons/csic_white.svg",
-  "Research stay"
+  "Apr. 2023\nResearch stay"
 );
 
 var lineDataItem = lineSeries.pushDataItem({
