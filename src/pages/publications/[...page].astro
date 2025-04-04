@@ -31,24 +31,24 @@ const { page } = Astro.props;
       </div>
     ) : (
       <ul>
-        {page.data.map((post) => (
+        {page.data.map((pub) => (
           <>
             <HorizontalPublication
-              title={post.data.title}
-              img={post.data.heroImage}
-              desc={post.data.description}
-              auth={post.data.auth}
-              journal={post.data.journal}
-              date={post.data.pubDate}
-              slug={createSlug(post.data.title, post.slug)}
-              url={post.data.url ? post.data.url : "/publications/" + createSlug(post.data.title, post.slug)}
+              title={pub.data.title}
+              img={pub.data.heroImage}
+              desc={pub.data.description}
+              auth={pub.data.auth}
+              journal={pub.data.journal}
+              date={pub.data.pubDate}
+              slug={createSlug(pub.data.title, pub.slug)}
+              url={pub.data.url ? pub.data.url : "/publications/" + createSlug(pub.data.title, pub.slug)}
               tag_url={"/publications/tag"}
               target="_self"
-              badge={post.data.badge}
-              tags={post.data.tags}
-              paperUrl={post.data.paperUrl}
-              githubUrl={post.data.githubUrl}
-              bibtex={post.data.bibtex}
+              badge={pub.data.badge}
+              tags={pub.data.tags}
+              paperUrl={pub.data.paperUrl}
+              githubUrl={pub.data.githubUrl}
+              bibtex={pub.data.bibtex}
             />
             <div class="divider my-0" />
           </>
