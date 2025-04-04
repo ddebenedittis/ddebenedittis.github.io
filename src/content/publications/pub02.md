@@ -7,9 +7,9 @@ pubDate: "4 Dec 2024"
 heroImage: "https://raw.githubusercontent.com/ddebenedittis/soft_bilinear_inverted_pendulum_astro/refs/heads/main/public/cover_pic.png"
 tags: ["Hierarchical Optimization", "Quadrupeds"]
 url: "https://ddebenedittis.github.io/soft_bilinear_inverted_pendulum_astro/"
-paperUrl: "https://ieeexplore.ieee.org/document/10777856"
+paperUrl: "https://doi.org/10.1109/TSMC.2024.3504342"
 githubUrl: "https://github.com/ddebenedittis/control_quadrupeds_soft_contacts"
-bibtex: "@ARTICLE{debenedittis2025soft,\n
+bibtex: "@article{debenedittis2025soft,\n
   author={De Benedittis, Davide and Angelini, Franco and Garabini, Manolo},\n
   journal={IEEE Transactions on Systems, Man, and Cybernetics: Systems}, \n
   title={Soft Bilinear Inverted Pendulum: A Model to Enable Locomotion With Soft Contacts}, \n

@@ -5,6 +5,16 @@ journal: "Italian Conference on Robotics and Intelligent Machines (I-RIM 3D)"
 description: "Efficient DDP-based algorithm for trajectory optimization of articulated soft robots."
 pubDate: "24 Oct 2024"
 heroImage: "/publications/art_soft_rob.webp"
+paperUrl: "https://doi.org/10.5281/zenodo.14731033"
+bibtex: "@article{de_benedittis2024articulated,\n
+  author={De Benedittis, Davide and Chhatoi, Saroj Prasad and Pierallini, Michele and Angelini, Franco and Mastalli, Carlos and Garabini, Manolo},\n
+  journal={Sixth Italian Conference on Robotics and Intelligent Machines}, \n
+  title={Articulated Soft Robots: A Feasibility Driven Control Approach},\n
+  month=oct,\n
+  year=2024,\n
+  publisher={Zenodo},\n
+  doi={10.5281/zenodo.14731033},\n
+  url={https://doi.org/10.5281/zenodo.14731033}}"
 badge: ""
 tags: ["Soft Robots"]
 ---
