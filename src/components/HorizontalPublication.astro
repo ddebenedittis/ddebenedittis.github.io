@@ -7,6 +7,7 @@ const {
   journal,
   date,
   url = "",
+  slug="",
   tag_url = "",
   badge,
   tags,
@@ -16,6 +17,8 @@ const {
   bibtex
 } = Astro.props;
 import { Image } from "astro:assets";
+
+const uniqueId = `bibtex-modal-${slug}`;
 // const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
 ---
 
@@ -101,7 +104,7 @@ import { Image } from "astro:assets";
       )}
       {bibtex && (
         <label
-          for="bibtex-modal"
+          for={uniqueId}
           class="btn btn-ghost flex items-center gap-2"
           onClick={(e) => e.stopPropagation()}
         >
@@ -122,16 +125,16 @@ import { Image } from "astro:assets";
 
 {bibtex && (
   <>
-    <input type="checkbox" id="bibtex-modal" class="modal-toggle" />
+    <input type="checkbox" id={uniqueId} class="modal-toggle" />
     <div class="modal">
       <div class="modal-box relative w-[960px] h-[480] max-w-full max-h-full">
-        <label for="bibtex-modal" class="btn btn-sm btn-circle absolute right-2 top-2">
+        <label for={uniqueId} class="btn btn-sm btn-circle absolute right-2 top-2">
           ✕
         </label>
         <h3 class="font-bold text-lg mb-2">Citation</h3>
-        <pre id="bibtex-content" class="bg-base-200 p-4 rounded text-lg overflow-auto">{bibtex.trim()}</pre>
+        <pre id={`bibtex-content-${uniqueId}`} class="bg-base-200 p-4 rounded text-lg overflow-auto">{bibtex.trim()}</pre>
 
-        <button id="copy-bibtex-btn" class="btn btn mt-4">
+        <button id={`copy-bibtex-btn-${uniqueId}`} class="btn btn mt-4">
           Copy
         </button>
       </div>
@@ -141,10 +144,10 @@ import { Image } from "astro:assets";
 
 <script is:client>
   document.addEventListener('DOMContentLoaded', () => {
-    const copyBtn = document.getElementById('copy-bibtex-btn');
+    const copyBtn = document.getElementById(`copy-bibtex-btn-${uniqueId}`);
     if (copyBtn) {
       copyBtn.addEventListener('click', () => {
-        const code = document.getElementById('bibtex-content').innerText;
+        const code = document.getElementById(`bibtex-content-${uniqueId}`).innerText;
         navigator.clipboard.writeText(code);
       });
     }
