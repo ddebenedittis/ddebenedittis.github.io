@@ -5,7 +5,7 @@ journal: "IEEE Transactions on Systems, Man, and Cybernetics: Systems"
 description: "Model-based two-control-blocks architecture (motion planner and tracking controller) for quadrupedal locomotion in the presence of soft contacts."
 pubDate: "4 Dec 2024"
 heroImage: "https://raw.githubusercontent.com/ddebenedittis/soft_bilinear_inverted_pendulum_astro/refs/heads/main/public/cover_pic.png"
-tags: ["Hierarchical Optimization", "Quadrupeds"]
+tags: ["Hierarchical QP", "Quadrupeds"]
 url: "https://ddebenedittis.github.io/soft_bilinear_inverted_pendulum_astro/"
 paperUrl: "https://doi.org/10.1109/TSMC.2024.3504342"
 githubUrl: "https://github.com/ddebenedittis/control_quadrupeds_soft_contacts"
