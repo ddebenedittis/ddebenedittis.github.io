@@ -1,6 +1,6 @@
 ---
 title: "Managing Conflicting Tasks in Heterogeneous Multi-Robot Systems Through Hierarchical Optimization"
-auth: "Davide De Benedittis, Manolo Garabini, Lucia Pallottino"
+auth: "<b>Davide De Benedittis</b>, Manolo Garabini, Lucia Pallottino"
 journal: "IEEE Robotics and Automation Letters"
 description: "Leverage hierarchical optimization (or hierarchical quadratic programming) for robust multi-robot coordination and guaranteed prioritized task execution."
 pubDate: "Apr 2025"
