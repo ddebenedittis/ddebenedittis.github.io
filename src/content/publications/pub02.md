@@ -1,6 +1,6 @@
 ---
 title: "Soft Bilinear Inverted Pendulum: a Model to Enable Locomotion with Soft Contacts"
-auth: "<b>Davide De Benedittis</b>, Franco Angelini, and Manolo Garabini"
+auth: "Davide De Benedittis, Franco Angelini, and Manolo Garabini"
 journal: "IEEE Transactions on Systems, Man, and Cybernetics: Systems"
 description: "Model-based two-control-blocks architecture (motion planner and tracking controller) for quadrupedal locomotion in the presence of soft contacts."
 pubDate: "4 Dec 2024"

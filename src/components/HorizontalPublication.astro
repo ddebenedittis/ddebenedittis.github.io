@@ -3,8 +3,8 @@ const {
   title,
   img,
   desc,
-  auth,
-  journal,
+  auth = "",
+  journal = "",
   date,
   url = "",
   slug="",
@@ -16,6 +16,13 @@ const {
   githubUrl,
   bibtex
 } = Astro.props;
+
+const myName = "Davide De Benedittis";
+const highlightedAuth = auth.replace(
+  myName,
+  `<span style="font-weight: 600;">${myName}</span>`
+);
+
 import { Image } from "astro:assets";
 
 const uniqueId = `bibtex-modal-${slug}`;
@@ -48,6 +55,7 @@ const uniqueId = `bibtex-modal-${slug}`;
             </span>
             {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
           </h1>
+          <span class="leading-tight" set:html={highlightedAuth} />
           <div>
             <span class="text-1xl mr-1"><em>{journal}</em> — {date}</span>
           </div>
