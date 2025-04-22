@@ -13,9 +13,9 @@ bibtex: "@article{debenedittis2025managing,\n
   journal={IEEE Robotics and Automation Letters},\n
   title={Managing Conflicting Tasks in Heterogeneous Multi-Robot Systems Through Hierarchical Optimization}, \n
   year={2025},\n
-  volume={},\n
-  number={},\n
-  pages={},\n
+  volume={10},\n
+  number={6},\n
+  pages={5305-5312},\n
   doi={10.1109/LRA.2025.3559843}}"
 ---
 
