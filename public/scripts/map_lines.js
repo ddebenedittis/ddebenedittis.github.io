@@ -254,9 +254,17 @@ var madrid = addCity(
   "/icons/csic_white.svg",
   "Apr. 2023\nResearch stay"
 );
+var delft = addCity(
+  52.0116, 4.3572,
+  "Delft – TU Delft",
+  "/cv#tud",
+  "#009fda",
+  "/icons/tud_white.svg",
+  "June to October 2025\nResearch stay"
+);
 
 var lineDataItem = lineSeries.pushDataItem({
-  pointsToConnect: [bari, pisa_1, madrid, pisa_2]
+  pointsToConnect: [bari, pisa_1, madrid, pisa_2, delft]
 });
 
 var planeSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
