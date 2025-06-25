@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Topics" sideBarActiveItemID="topics">
+    <div class="text-3xl w-full font-bold mb-5">My Topics</div>
+    
+    <b> Presentations</b>:
+    <ul class="list-disc mx-6 mb-10 mt-2 grid gap-2">
+        <li>
+        <a 
+            href="https://ddebenedittis.github.io/topics_slides/2025-06-23_differentiable_optimization"
+            class="font-semibold relative inline-block group"
+        >
+            <span class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100">
+            Differentiable Optimization
+            </span>
+            <span class="transition-opacity duration-300 ease-in-out group-hover:opacity-0">
+            Differentiable Optimization
+            </span>
+        </a> - backpropagate through parametrized optimization problems to optimize the parameters themselves.
+        </li>
+    </ul>
+</BaseLayout>
