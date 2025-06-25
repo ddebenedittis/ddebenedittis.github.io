@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import createSlug from "../../lib/createSlug"
+
+export async function getStaticPaths({ paginate }) {
+  const items = await getCollection("topics");
+  items.sort((a, b) => b.data.updatedDate.valueOf() - a.data.updatedDate.valueOf());
+  return paginate(items, { pageSize: 10 });
+}
+const { page } = Astro.props;
+---
+
+<BaseLayout title="Topics" sideBarActiveItemID="topics">
+  <div class="text-3xl w-full font-bold mb-5">My Topics</div>
+    
+  <b> Presentations</b>:
+  <ul class="list-disc mx-6 mb-10 mt-2 grid gap-2">
+    {
+      page.data.map((item) => (
+        <>
+          <li>
+          <a 
+            href={"/topics/" + createSlug(item.data.title, item.slug)}
+            class="font-semibold relative inline-block group"
+          >
+            <span class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100">
+              {item.data.title}
+            </span>
+            <span class="transition-opacity duration-300 ease-in-out group-hover:opacity-0">
+              {item.data.title}
+            </span>
+          </a> - {item.data.description}
+          </li>
+        </>
+      ))
+    }
+  </ul>
+</BaseLayout>

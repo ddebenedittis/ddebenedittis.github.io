@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FullscreenIframe from '../../components/FullscreenIframe.astro';
+import { CollectionEntry, getCollection } from "astro:content";
+import createSlug from "../../lib/createSlug"
+
+export async function getStaticPaths() {
+  const itemEntries = await getCollection("topics");
+  return itemEntries.map((entry) => ({
+    params: { slug: createSlug(entry.data.title, entry.slug) },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"store">;
+}
+
+const { entry } = Astro.props;
+// const item: StoreSchema = entry.data;
+const { Content } = await entry.render();
+---
+
+<BaseLayout title="Topics" sideBarActiveItemID="topics">
+
+<div class="text-3xl w-full font-bold mb-5">{entry.data.title}</div>
+
+<FullscreenIframe url={entry.data.url} />
+
+</BaseLayout>
