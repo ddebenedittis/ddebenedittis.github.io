@@ -97,8 +97,6 @@ polygonSeries.mapPolygons.template.setAll({
 });
 
 // Visited countries
-// IT, GB, FR, ES, DE, CZ, HU, NO, SE, GR, CH, PT, AT, NL, HR, BG
-
 polygonSeries.data.setAll([
   {id: "IT", polygonSettings: {fill: am5.color(0x7dd97b)}},
   {id: "GB", polygonSettings: {fill: am5.color(0x7dd97b)}},
@@ -115,7 +113,8 @@ polygonSeries.data.setAll([
   {id: "AT", polygonSettings: {fill: am5.color(0x7dd97b)}},
   {id: "NL", polygonSettings: {fill: am5.color(0x7dd97b)}},
   {id: "HR", polygonSettings: {fill: am5.color(0x7dd97b)}},
-  {id: "BG", polygonSettings: {fill: am5.color(0x7dd97b)}}
+  {id: "BG", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "CN", polygonSettings: {fill: am5.color(0x7dd97b)}},
 ]);
 
 // Create line series for trajectory lines
@@ -260,11 +259,19 @@ var delft = addCity(
   "/cv#tud",
   "#009fda",
   "/icons/tud_white.svg",
-  "June to October 2025\nResearch stay"
+  "June to November 2025\nResearch stay"
+);
+var hangzhou = addCity(
+  30.2741, 120.1551,
+  "Hangzhou",
+  "",
+  "#00858d",
+  "/icons/iros25.webp",
+  "IROS 2025 Conference"
 );
 
 var lineDataItem = lineSeries.pushDataItem({
-  pointsToConnect: [bari, pisa_1, madrid, pisa_2, delft]
+  pointsToConnect: [bari, pisa_1, madrid, pisa_2, delft, hangzhou]
 });
 
 var planeSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
