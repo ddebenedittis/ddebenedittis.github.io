@@ -115,6 +115,8 @@ polygonSeries.data.setAll([
   {id: "HR", polygonSettings: {fill: am5.color(0x7dd97b)}},
   {id: "BG", polygonSettings: {fill: am5.color(0x7dd97b)}},
   {id: "CN", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "MA", polygonSettings: {fill: am5.color(0x7dd97b)}},
+  {id: "KR", polygonSettings: {fill: am5.color(0x7dd97b)}},
 ]);
 
 // Create line series for trajectory lines
