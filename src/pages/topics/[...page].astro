@@ -21,7 +21,7 @@ const { page } = Astro.props;
         <>
           <li>
           <a 
-            href={"/topics/" + createSlug(item.data.title, item.slug)}
+            href={"/topics/" + createSlug(item.data.title, item.id)}
             class="font-semibold relative inline-block group"
           >
             <span class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100">

@@ -1,4 +1,6 @@
 import { z, defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+
 const blogSchema = z.object({
     title: z.string(),
     description: z.string(),
@@ -27,10 +29,28 @@ const storeSchema = z.object({
 export type BlogSchema = z.infer<typeof blogSchema>;
 export type StoreSchema = z.infer<typeof storeSchema>;
 
-const blogCollection = defineCollection({ schema: blogSchema });
-const storeCollection = defineCollection({ schema: storeSchema });
+const blogCollection = defineCollection({
+    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" }),
+    schema: blogSchema,
+});
+const storeCollection = defineCollection({
+    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/store" }),
+    schema: storeSchema,
+});
+
+// `publications` and `topics` are intentionally schema-less: their frontmatter is
+// validated only at use sites. Keeping `pubDate` as a string (not coerced to a Date)
+// is required so the publication sort can treat "under review" specially.
+const publicationsCollection = defineCollection({
+    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/publications" }),
+});
+const topicsCollection = defineCollection({
+    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/topics" }),
+});
 
 export const collections = {
     'blog': blogCollection,
-    'store': storeCollection
+    'store': storeCollection,
+    'publications': publicationsCollection,
+    'topics': topicsCollection,
 }

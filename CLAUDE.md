@@ -32,8 +32,9 @@ Astro content-collection site. Content lives as Markdown in `src/content/<collec
 
 ### Content collections
 
-- `src/content/config.ts` declares Zod schemas for **`blog`** and **`store`** only.
-- **`publications/` and `topics/` are NOT declared** in `config.ts` — they are implicit collections inferred by Astro from the directory, with frontmatter validated only at use sites. When adding fields (e.g. `auth`, `journal`, `paperUrl`, `bibtex`, `tags` on publications), there is no schema to update; match the frontmatter of existing entries like `src/content/publications/pub01.md`.
+- The site uses Astro's **Content Layer API** (Astro 5+). Collections are declared in **`src/content.config.ts`** (note: at `src/`, NOT inside `src/content/` — Astro 6 errors on the legacy `src/content/config.ts` location), each with a `glob({ pattern, base })` loader.
+- **`blog`** and **`store`** have Zod schemas; **`publications`** and **`topics`** are declared with a loader but **no schema** (frontmatter validated only at use sites). Keep them schema-less so `pubDate` stays a *string* — the publication sort calls `.toLowerCase()` on it, and `z.coerce.date()` would break that. When adding fields (e.g. `auth`, `journal`, `paperUrl`, `bibtex`, `tags` on publications), there is no schema to update; match the frontmatter of existing entries like `src/content/publications/pub01.md`.
+- Content Layer uses **`entry.id`** (not the old `entry.slug`) and **`render(entry)`** imported from `astro:content` (not `entry.render()`).
 
 ### Pages & routing
 
@@ -45,7 +46,7 @@ Astro content-collection site. Content lives as Markdown in `src/content/<collec
 ### Slugs & global config
 
 - `src/config.ts` holds site-wide constants (`SITE_TITLE`, `GENERATE_SLUG_FROM_TITLE`, `TRANSITION_API`).
-- `src/lib/createSlug.ts` derives a URL slug from the title when `GENERATE_SLUG_FROM_TITLE` is true (currently `true`), otherwise uses the file's static slug. Call as `createSlug(item.data.title, item.slug)`.
+- `src/lib/createSlug.ts` derives a URL slug from the title when `GENERATE_SLUG_FROM_TITLE` is true (currently `true`), otherwise uses the file's static slug. Call as `createSlug(item.data.title, item.id)`.
 
 ### Navigation
 
