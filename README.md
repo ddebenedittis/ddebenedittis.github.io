@@ -70,7 +70,6 @@ pnpm run dev
 │   └── profile.webp
 │   └── social_img.webp
 ├── astro.config.mjs
-├── tailwind.config.cjs
 ├── package.json
 └── tsconfig.json
 ```

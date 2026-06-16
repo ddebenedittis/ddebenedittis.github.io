@@ -54,6 +54,8 @@ Sidebar nav items are hardcoded in `src/components/SideBarMenu.astro`; each `<a>
 
 ## Styling
 
-- TailwindCSS + **DaisyUI** (`tailwind.config.cjs`), with `@tailwindcss/typography`.
-- DaisyUI themes restricted to light + dark only (`themes: false`, `darkTheme: "dark"`).
+- **Tailwind CSS 4** via the **`@tailwindcss/vite`** plugin (registered in `astro.config.mjs` under `vite.plugins`, NOT the deprecated `@astrojs/tailwind` integration), plus **DaisyUI 5** and `@tailwindcss/typography`.
+- Config is **CSS-first** in `src/styles/global.css` (imported once in `src/components/BaseHead.astro`): `@import "tailwindcss";`, `@plugin "@tailwindcss/typography";`, and `@plugin "daisyui" { themes: light --default, dark --prefersdark; }`. There is **no `tailwind.config.cjs`** (TW4 auto-detects content via the Vite module graph) and **no PostCSS config**.
+- DaisyUI is restricted to **light + dark only**, with dark as the `prefers-color-scheme: dark` default — that's what `themes: light --default, dark --prefersdark;` encodes (the TW4/DaisyUI-5 equivalent of the old v4 `themes: false` + `darkTheme: "dark"`). Theme switching is driven by `astro-theme-toggle` setting `data-theme="light"|"dark"`, so keep the theme names exactly `light`/`dark`.
+- TW4 shifted the size scale: existing `shadow-sm`→`shadow-xs`, `shadow`→`shadow-sm`, `rounded`→`rounded-sm`, `backdrop-blur`→`backdrop-blur-sm`, and opacity utilities like `bg-opacity-90` are removed (use the `bg-base-100/90` slash modifier). Keep this in mind when copying older Tailwind 3 snippets.
 - `.npmrc` sets `shamefully-hoist=true` so Astro's deps resolve under pnpm.
